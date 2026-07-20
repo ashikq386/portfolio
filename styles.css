@@ -217,10 +217,8 @@ body { margin: 0; box-sizing: border-box; background: #000000; }
   overflow: hidden; will-change: transform;
 }
 .project-card:hover { box-shadow: inset 0 1px 0 rgba(255,255,255,0.2), 0 24px 70px #3E6FE033; }
-.project-art { position: relative; height: 180px; overflow: hidden; display: flex; align-items: center; justify-content: center; }
-.art-square { position: absolute; width: 120px; height: 120px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.25); }
-.art-circle { position: absolute; width: 70px; height: 70px; border-radius: 50%; background: rgba(255,255,255,0.08); top: 20px; right: 30px; }
-.art-chip { position: absolute; width: 36px; height: 36px; background: rgba(255,255,255,0.12); bottom: 18px; left: 24px; border-radius: 8px; }
+.project-art { position: relative; height: 180px; overflow: hidden; }
+.project-art svg { display: block; width: 100%; height: 100%; }
 .project-body { padding: 26px; }
 .project-body h3 { font-family: 'Space Grotesk', sans-serif; font-size: 19px; font-weight: 600; color: #fff; margin: 0 0 10px; }
 .project-body > p { color: rgba(237,235,246,0.65); font-size: 14px; line-height: 1.65; margin: 0 0 16px; }
