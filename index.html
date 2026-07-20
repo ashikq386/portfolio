@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mohammed Ashikq — Designer · Developer · AI/ML</title>
+<meta name="description" content="Portfolio of Mohammed Ashikq — MSc AI student and builder crafting intelligent, beautifully-designed digital experiences.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="portfolio-root">
+
+  <div id="cursor-dot"></div>
+  <div id="cursor-ring"></div>
+
+  <div class="bg-rays">
+    <div class="ray ray-1"></div>
+    <div class="ray ray-2"></div>
+    <div class="ray ray-3"></div>
+  </div>
+
+  <div id="glow"></div>
+
+  <nav class="nav">
+    <a href="#home" class="logo">MA<span class="dot">.</span></a>
+    <button id="menu-btn" class="menu-btn" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#contact">Contact</a>
+      <a href="assets/Mohammed_Ashikq_Resume.pdf" download="Mohammed_Ashikq_Resume.pdf" class="nav-resume">Resume</a>
+    </div>
+  </nav>
+
+  <div id="mobile-menu" class="mobile-menu" hidden>
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#experience">Experience</a>
+    <a href="#contact">Contact</a>
+    <button id="menu-close" aria-label="Close menu">×</button>
+  </div>
+
+  <section id="home" class="hero">
+    <div class="hero-inner">
+
+      <div class="eyebrow hero-eyebrow">Hi, I'm</div>
+      <h1>Mohammed Ashikq</h1>
+      <div class="typed-line"><span id="typed"></span><span class="caret"></span></div>
+
+      <div class="portrait-outer">
+        <div class="portrait-glow"></div>
+        <canvas id="portrait-canvas" aria-label="Mohammed Ashikq" role="img"></canvas>
+      </div>
+
+      <p class="hero-sub">MSc AI student and builder crafting intelligent, beautifully-designed digital experiences — from computer vision systems to premium interfaces.</p>
+
+      <div class="hero-ctas">
+        <a href="#projects" class="btn btn-light magnetic">View Projects</a>
+        <a href="assets/Mohammed_Ashikq_Resume.pdf" download="Mohammed_Ashikq_Resume.pdf" class="btn btn-ghost magnetic">Download Resume</a>
+      </div>
+
+      <div class="hero-socials">
+        <a href="https://github.com/ashikq386" target="_blank" rel="noopener" aria-label="GitHub">GH</a>
+        <a href="#contact" aria-label="LinkedIn">in</a>
+        <a href="mailto:ashikqashikq386@gmail.com" aria-label="Email">@</a>
+      </div>
+    </div>
+
+    <div class="scroll-hint">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <section id="about" class="section about">
+    <div class="about-grid">
+      <div class="about-copy">
+        <div data-reveal class="reveal-up">
+          <div class="eyebrow">About Me</div>
+          <h2>Designing intelligent, beautiful experiences.</h2>
+          <p class="about-text">Ambitious and detail-oriented MSc Artificial Intelligence student with a strong foundation in Python, machine learning, and deep learning — and an equally strong instinct for interface design. I build end-to-end products that span computer vision, mobile applications, and premium UI/UX, always pairing rigorous engineering with a designer's eye for polish.</p>
+        </div>
+        <div class="traits">
+          <div data-reveal class="trait">Creative Designer</div>
+          <div data-reveal class="trait">Frontend Developer</div>
+          <div data-reveal class="trait">UI/UX Designer</div>
+          <div data-reveal class="trait">Problem Solver</div>
+          <div data-reveal class="trait">Fast Learner</div>
+          <div data-reveal class="trait">Team Player</div>
+          <div data-reveal class="trait">Detail-Oriented</div>
+          <div data-reveal class="trait">Always Exploring New Tech</div>
+        </div>
+      </div>
+
+      <div class="about-side">
+        <div class="monogram-wrap">
+          <div class="orbit orbit-1"></div>
+          <div class="orbit orbit-2"></div>
+          <div class="monogram">MA</div>
+        </div>
+        <div data-reveal class="glass-card currently">
+          <div class="eyebrow small">Currently</div>
+          <div class="currently-title">MSc Data Science</div>
+          <div class="currently-sub">Aston University, London — Expected 2027</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills" class="section skills">
+    <div data-reveal class="section-head reveal-up">
+      <div class="eyebrow">Skills</div>
+      <h2>Tools &amp; technologies I work with</h2>
+    </div>
+
+    <div class="skill-group">
+      <div class="skill-group-name">Design</div>
+      <div class="skill-grid">
+        <div data-reveal class="skill-item"><div class="skill-icon">Fi</div><span>Figma</span></div>
+        <div data-reveal class="skill-item"><div class="skill-icon">Ps</div><span>Photoshop</span></div>
+        <div data-reveal class="skill-item"><div class="skill-icon">Ai</div><span>Illustrator</span></div>
+        <div data-reveal class="skill-item"><div class="skill-icon">UI</div><span>UI Design</span></div>
+        <div data-reveal class="skill-item"><div class="skill-icon">UX</div><span>UX Design</span></div>
+      </div>
+    </div>
+
+    <div class="skill-group">
+      <div class="skill-group-name">Frontend</div>
+      <div class="skill-grid">
+        <div data-reveal class="skill-item"><div class="skill-icon">HT</div><span>HTML</span></div>
+        <div data-reveal class="skill-item"><div class="skill-icon">CS</div><span>CSS</span></div>
+        <div data-reveal class="skill-item"><div class="skill-icon">JS</div><span>JavaScript</span></div>
+        <div data-reveal class="skill-item"><div class="skill-icon">Re</div><span>React</span></div>
+        <div data-reveal class="skill-item"><div class="skill-icon">Nx</div><span>Next.js</span></div>
+        <div data-reveal class="skill-item"><div class="skill-icon">Tw</div><span>Tailwind CSS</span></div>
+      </div>
+    </div>
+
+    <div class="skill-group">
+      <div class="skill-group-name">Programming</div>
+      <div class="skill-grid">
+        <div data-reveal class="skill-item"><div class="skill-icon">Py</div><span>Python</span></div>
+        <div data-reveal class="skill-item"><div class="skill-icon">Jv</div><span>Java</span></div>
+        <div data-reveal class="skill-item"><div class="skill-icon">Fb</div><span>Firebase</span></div>
+        <div data-reveal class="skill-item"><div class="skill-icon">Gi</div><span>Git</span></div>
+        <div data-reveal class="skill-item"><div class="skill-icon">Gh</div><span>GitHub</span></div>
+      </div>
+    </div>
+
+    <div class="skill-group">
+      <div class="skill-group-name">AI &amp; ML</div>
+      <div class="skill-grid">
+        <div data-reveal class="skill-item"><div class="skill-icon">ML</div><span>Machine Learning</span></div>
+        <div data-reveal class="skill-item"><div class="skill-icon">DL</div><span>Deep Learning</span></div>
+        <div data-reveal class="skill-item"><div class="skill-icon">CV</div><span>Computer Vision</span></div>
+        <div data-reveal class="skill-item"><div class="skill-icon">Cv</div><span>OpenCV</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects" class="section projects">
+    <div data-reveal class="section-head reveal-up">
+      <div class="eyebrow">Projects</div>
+      <h2>Selected work</h2>
+    </div>
+
+    <div class="project-grid">
+      <article data-reveal class="project-card" data-id="geo" style="transition-delay:0ms;">
+        <div class="project-art" style="background:linear-gradient(135deg, rgba(143,193,255,0.28), rgba(255,255,255,0.06));">
+          <div class="art-square" style="transform:rotate(12deg);"></div>
+          <div class="art-circle"></div>
+          <div class="art-chip" style="transform:rotate(12deg);"></div>
+        </div>
+        <div class="project-body">
+          <h3>Geo-Fencing Attendance Management System</h3>
+          <p>Mobile app for automated attendance using geo-fencing, eliminating manual processes and proxy attendance.</p>
+          <ul class="project-bullets" hidden>
+            <li>Designed and developed a mobile application for automated attendance tracking using geo-fencing technology.</li>
+            <li>Implemented location verification logic to confirm user presence within a predefined boundary before recording attendance.</li>
+            <li>Eliminated manual attendance and significantly reduced proxy attendance through intelligent automation.</li>
+          </ul>
+          <div class="project-tags">
+            <span>Python</span><span>Deep Learning</span><span>CNN</span><span>Geo-Fencing</span>
+          </div>
+          <div class="project-actions">
+            <a href="https://github.com/ashikq386" target="_blank" rel="noopener" class="btn-code">View Code</a>
+            <button class="btn-case" type="button">Case Study</button>
+          </div>
+        </div>
+      </article>
+
+      <article data-reveal class="project-card" data-id="colorize" style="transition-delay:100ms;">
+        <div class="project-art" style="background:linear-gradient(135deg, rgba(255,255,255,0.14), rgba(94,140,255,0.22));">
+          <div class="art-square" style="transform:rotate(-8deg);"></div>
+          <div class="art-circle"></div>
+          <div class="art-chip" style="transform:rotate(-8deg);"></div>
+        </div>
+        <div class="project-body">
+          <h3>Image Colorization Using Deep Learning Autoencoders</h3>
+          <p>Autoencoder architecture that converts grayscale images into realistic colour images.</p>
+          <ul class="project-bullets" hidden>
+            <li>Developed a deep learning-based image colorization system converting grayscale images into realistic colour images.</li>
+            <li>Designed an autoencoder using convolutional layers for feature extraction and transposed convolutions for reconstruction.</li>
+            <li>Achieved accurate, visually compelling colour generation through iterative training and evaluation.</li>
+          </ul>
+          <div class="project-tags">
+            <span>Python</span><span>Deep Learning</span><span>CNN</span><span>Autoencoders</span>
+          </div>
+          <div class="project-actions">
+            <a href="https://github.com/ashikq386" target="_blank" rel="noopener" class="btn-code">View Code</a>
+            <button class="btn-case" type="button">Case Study</button>
+          </div>
+        </div>
+      </article>
+
+      <article data-reveal class="project-card" data-id="construction" style="transition-delay:200ms;">
+        <div class="project-art" style="background:linear-gradient(135deg, rgba(94,140,255,0.32), rgba(10,18,40,0.25));">
+          <div class="art-square" style="transform:rotate(20deg);"></div>
+          <div class="art-circle"></div>
+          <div class="art-chip" style="transform:rotate(20deg);"></div>
+        </div>
+        <div class="project-body">
+          <h3>Unauthorized Construction Monitoring System</h3>
+          <p>AI monitoring solution analysing drone survey data to flag unauthorized urban construction.</p>
+          <ul class="project-bullets" hidden>
+            <li>Built an AI-powered monitoring solution that analyses drone survey data to detect newly constructed structures.</li>
+            <li>Integrated comparison logic against municipal records to automatically flag unauthorized constructions.</li>
+            <li>Contributed to improved urban planning and regulatory compliance through automated detection.</li>
+          </ul>
+          <div class="project-tags">
+            <span>AI</span><span>Computer Vision</span><span>Drone Data</span>
+          </div>
+          <div class="project-actions">
+            <a href="https://github.com/ashikq386" target="_blank" rel="noopener" class="btn-code">View Code</a>
+            <button class="btn-case" type="button">Case Study</button>
+          </div>
+        </div>
+      </article>
+
+      <article data-reveal class="project-card" data-id="justorder" style="transition-delay:300ms;">
+        <div class="project-art" style="background:linear-gradient(135deg, rgba(255,255,255,0.16), rgba(143,193,255,0.18));">
+          <div class="art-square" style="transform:rotate(-15deg);"></div>
+          <div class="art-circle"></div>
+          <div class="art-chip" style="transform:rotate(-15deg);"></div>
+        </div>
+        <div class="project-body">
+          <h3>Just Order — Food Delivery Application</h3>
+          <p>Food delivery app for browsing restaurants, ordering, and real-time delivery tracking.</p>
+          <ul class="project-bullets" hidden>
+            <li>Developed a food delivery application enabling users to browse restaurants, place orders, and track deliveries in real time.</li>
+            <li>Designed an intuitive, user-friendly interface for a seamless ordering experience.</li>
+            <li>Built an integrated order management system to help restaurants handle incoming orders efficiently.</li>
+          </ul>
+          <div class="project-tags">
+            <span>App Development</span><span>UI/UX</span>
+          </div>
+          <div class="project-actions">
+            <a href="https://github.com/ashikq386" target="_blank" rel="noopener" class="btn-code">View Code</a>
+            <button class="btn-case" type="button">Case Study</button>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="experience" class="section experience">
+    <div data-reveal class="section-head reveal-up">
+      <div class="eyebrow">Journey</div>
+      <h2>Experience &amp; education</h2>
+    </div>
+    <div class="timeline">
+      <div data-reveal class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-year">Graduated</div>
+        <div class="timeline-title">B.Sc. Artificial Intelligence &amp; Machine Learning</div>
+        <div class="timeline-org">Sri Krishna Arts and Science College</div>
+        <div class="timeline-desc">Built a strong foundation in AI/ML fundamentals, programming, and data structures.</div>
+      </div>
+      <div data-reveal class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-year">2023 – 2024</div>
+        <div class="timeline-title">Data Analytics Internship Programme — Mentor</div>
+        <div class="timeline-org">Self-led Initiative</div>
+        <div class="timeline-desc">Mentored students in Python, data analysis, and visualisation techniques.</div>
+      </div>
+      <div data-reveal class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-year">2024</div>
+        <div class="timeline-title">Smart India Hackathon</div>
+        <div class="timeline-org">National Level</div>
+        <div class="timeline-desc">Developed AI-powered civic solutions, including the Unauthorized Construction Monitoring System.</div>
+      </div>
+      <div data-reveal class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-year">Sep 2025 – Present</div>
+        <div class="timeline-title">MSc Data Science</div>
+        <div class="timeline-org">Aston University, London</div>
+        <div class="timeline-desc">Pursuing advanced study in data science, expected graduation 2027.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="achievements" class="section achievements">
+    <div class="stats-grid">
+      <div class="stat">
+        <div class="stat-num" data-counter="10" data-suffix="+">0</div>
+        <div class="stat-label">Projects Completed</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" data-counter="10" data-suffix="+">0</div>
+        <div class="stat-label">Design Projects</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" data-counter="15" data-suffix="+">0</div>
+        <div class="stat-label">Technologies Learned</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" data-counter="3" data-suffix="+">0</div>
+        <div class="stat-label">Years of Learning</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="testimonials" class="section testimonials">
+    <div data-reveal class="section-head reveal-up">
+      <div class="eyebrow">Testimonials</div>
+      <h2>Kind words</h2>
+    </div>
+    <div class="testimonial-grid">
+      <div data-reveal class="testimonial">
+        <div class="quote-mark">"</div>
+        <p>Working alongside Mohammed during the Smart India Hackathon, I saw first-hand how quickly he could turn a complex civic problem into a working AI prototype.</p>
+        <div class="testimonial-meta">
+          <div class="avatar">HT</div>
+          <div>
+            <div class="t-name">Hackathon Teammate</div>
+            <div class="t-role">SIH 2024 Team</div>
+          </div>
+        </div>
+      </div>
+      <div data-reveal class="testimonial">
+        <div class="quote-mark">"</div>
+        <p>His guidance during the Data Analytics internship made Python and visualisation genuinely click for me. Patient, clear, and always encouraging.</p>
+        <div class="testimonial-meta">
+          <div class="avatar">IM</div>
+          <div>
+            <div class="t-name">Internship Mentee</div>
+            <div class="t-role">Data Analytics Programme</div>
+          </div>
+        </div>
+      </div>
+      <div data-reveal class="testimonial">
+        <div class="quote-mark">"</div>
+        <p>Consistently one of the most detail-oriented students I've supervised — his project on image colorisation was executed to a professional standard.</p>
+        <div class="testimonial-meta">
+          <div class="avatar">AS</div>
+          <div>
+            <div class="t-name">Academic Supervisor</div>
+            <div class="t-role">B.Sc. AI &amp; ML Faculty</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="section contact">
+    <div data-reveal class="section-head reveal-up">
+      <div class="eyebrow">Contact</div>
+      <h2>Let's build something great</h2>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <div class="contact-row">
+          <div class="contact-icon icon-primary">@</div>
+          <div><div class="contact-label">Email</div><a href="mailto:ashikqashikq386@gmail.com">ashikqashikq386@gmail.com</a></div>
+        </div>
+        <div class="contact-row">
+          <div class="contact-icon icon-secondary">#</div>
+          <div><div class="contact-label">Phone</div><a href="tel:+4407344751669">+44 07344 751669</a></div>
+        </div>
+        <div class="contact-row">
+          <div class="contact-icon icon-accent">◎</div>
+          <div><div class="contact-label">Location</div><div class="contact-value">London, UK</div></div>
+        </div>
+        <div class="contact-row">
+          <div class="contact-icon icon-primary gh">GH</div>
+          <div><div class="contact-label">GitHub</div><a href="https://github.com/ashikq386" target="_blank" rel="noopener">github.com/ashikq386</a></div>
+        </div>
+      </div>
+
+      <form id="contact-form" class="contact-form" novalidate>
+        <input type="hidden" name="access_key" value="5130cefc-4d94-4937-a765-9985f4aabf46">
+        <input type="hidden" name="subject" value="New Portfolio Message — Mohammed Ashikq">
+        <input type="hidden" name="from_name" value="Portfolio Website">
+        <div>
+          <input type="text" id="cf-name" name="name" placeholder="Your name" autocomplete="name">
+          <div class="field-error" id="err-name" hidden></div>
+        </div>
+        <div>
+          <input type="email" id="cf-email" name="email" placeholder="Your email" autocomplete="email">
+          <div class="field-error" id="err-email" hidden></div>
+        </div>
+        <div>
+          <textarea id="cf-message" name="message" placeholder="Tell me about your project..." rows="5"></textarea>
+          <div class="field-error" id="err-message" hidden></div>
+        </div>
+        <button type="submit" id="cf-submit" class="magnetic">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-name">Mohammed Ashikq<span class="dot">.</span></div>
+    <div class="footer-copy">© 2026 Mohammed Ashikq. Crafted with intention.</div>
+    <div class="footer-socials">
+      <a href="https://github.com/ashikq386" target="_blank" rel="noopener">GH</a>
+      <a href="mailto:ashikqashikq386@gmail.com">@</a>
+    </div>
+  </footer>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
