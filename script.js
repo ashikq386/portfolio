@@ -35,47 +35,17 @@
     a.addEventListener('click', function () { mobileMenu.hidden = true; });
   });
 
-  /* ---------- cursor + glow ---------- */
+  /* ---------- soft glow that follows the mouse ---------- */
   var glow = document.getElementById('glow');
-  var cursorDot = document.getElementById('cursor-dot');
-  var cursorRing = document.getElementById('cursor-ring');
-  var finePointer = window.matchMedia('(pointer: fine)');
-  var mouse = {
-    cx: window.innerWidth / 2, cy: window.innerHeight / 2,
-    ringX: window.innerWidth / 2, ringY: window.innerHeight / 2
-  };
-  var cursorHover = false;
-
   window.addEventListener('mousemove', function (e) {
-    mouse.cx = e.clientX;
-    mouse.cy = e.clientY;
     glow.style.transform = 'translate(' + (e.clientX - 160) + 'px, ' + (e.clientY - 160) + 'px)';
-    cursorDot.style.transform = 'translate(' + (e.clientX - 3.5) + 'px, ' + (e.clientY - 3.5) + 'px)';
   });
 
-  document.addEventListener('mouseover', function (e) {
-    if (e.target.closest && e.target.closest('a, button, input, textarea')) {
-      cursorHover = true;
-      cursorRing.style.backgroundColor = 'rgba(255,255,255,0.12)';
-    }
-  });
-  document.addEventListener('mouseout', function (e) {
-    if (e.target.closest && e.target.closest('a, button, input, textarea')) {
-      cursorHover = false;
-      cursorRing.style.backgroundColor = 'transparent';
-    }
-  });
-
-  function cursorTick() {
-    mouse.ringX += (mouse.cx - mouse.ringX) * 0.18;
-    mouse.ringY += (mouse.cy - mouse.ringY) * 0.18;
-    if (finePointer.matches) {
-      var scale = cursorHover ? 2.2 : 1;
-      cursorRing.style.transform = 'translate(' + (mouse.ringX - 18) + 'px, ' + (mouse.ringY - 18) + 'px) scale(' + scale + ')';
-    }
-    requestAnimationFrame(cursorTick);
-  }
-  requestAnimationFrame(cursorTick);
+  /* ---------- nav: transparent over the hero, glass once scrolled ---------- */
+  var nav = document.querySelector('.nav');
+  function updateNav() { nav.classList.toggle('scrolled', window.scrollY > 40); }
+  window.addEventListener('scroll', updateNav, { passive: true });
+  updateNav();
 
   /* ---------- reveal on scroll ---------- */
   var revealObserver = new IntersectionObserver(function (entries) {
@@ -130,6 +100,7 @@
 
     var layers = hero.querySelectorAll('[data-depth]');
     var target = { x: 0, y: 0 }, cur = { x: 0, y: 0 };
+    var photo = createDepthPhoto(hero.querySelector('.hero-portrait > img'), 'assets/portrait-depth.webp');
 
     hero.addEventListener('mousemove', function (e) {
       var rect = hero.getBoundingClientRect();
@@ -150,10 +121,101 @@
         'perspective(900px) rotateX(' + (-cur.y * 22).toFixed(2) + 'deg) rotateY(' + (cur.x * 28).toFixed(2) + 'deg)';
       card.style.setProperty('--gx', (50 + cur.x * 120).toFixed(1) + '%');
       card.style.setProperty('--gy', (40 + cur.y * 120).toFixed(1) + '%');
+      if (photo) photo.render(cur.x, cur.y);
       requestAnimationFrame(tick);
     }
     requestAnimationFrame(tick);
   })();
+
+  /* ---------- 2.5D depth photo ----------
+     Draws the portrait on a WebGL canvas and offsets each pixel by a depth map
+     (head and hand near, background far), so the photo turns slightly toward
+     the cursor. Falls back to the plain <img> if WebGL or the images fail. */
+  function createDepthPhoto(img, depthSrc) {
+    if (!img) return null;
+    var canvas = document.createElement('canvas');
+    var gl = canvas.getContext('webgl', { premultipliedAlpha: false, antialias: false });
+    if (!gl) return null;
+
+    var vs = 'attribute vec2 p; varying vec2 uv;' +
+      'void main(){ uv = vec2(p.x * 0.5 + 0.5, 0.5 - p.y * 0.5); gl_Position = vec4(p, 0.0, 1.0); }';
+    var fs = 'precision mediump float; varying vec2 uv;' +
+      'uniform sampler2D photo, depth; uniform vec2 offset;' +
+      'void main(){' +
+      '  vec2 st = uv; float d = texture2D(depth, st).r;' +
+      /* a few refinement steps keep edges from smearing */
+      '  for (int i = 0; i < 4; i++) { st = uv - offset * (d - 0.6); d = texture2D(depth, st).r; }' +
+      '  gl_FragColor = texture2D(photo, clamp(st, 0.001, 0.999));' +
+      '}';
+    function shader(type, src) {
+      var sh = gl.createShader(type); gl.shaderSource(sh, src); gl.compileShader(sh);
+      return gl.getShaderParameter(sh, gl.COMPILE_STATUS) ? sh : null;
+    }
+    var v = shader(gl.VERTEX_SHADER, vs), f = shader(gl.FRAGMENT_SHADER, fs);
+    if (!v || !f) return null;
+    var prog = gl.createProgram();
+    gl.attachShader(prog, v); gl.attachShader(prog, f); gl.linkProgram(prog);
+    if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) return null;
+    gl.useProgram(prog);
+
+    gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
+    var loc = gl.getAttribLocation(prog, 'p');
+    gl.enableVertexAttribArray(loc);
+    gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+    var uOffset = gl.getUniformLocation(prog, 'offset');
+    gl.uniform1i(gl.getUniformLocation(prog, 'photo'), 0);
+    gl.uniform1i(gl.getUniformLocation(prog, 'depth'), 1);
+
+    function texture(unit, image) {
+      gl.activeTexture(gl.TEXTURE0 + unit);
+      gl.bindTexture(gl.TEXTURE_2D, gl.createTexture());
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image);
+    }
+
+    var ready = false, last = null;
+    var depthImg = new Image();
+    function load(image) {
+      return new Promise(function (res, rej) {
+        if (image.complete && image.naturalWidth) return res();
+        image.addEventListener('load', res); image.addEventListener('error', rej);
+      });
+    }
+    depthImg.src = depthSrc;
+    Promise.all([load(img), load(depthImg)]).then(function () {
+      texture(0, img); texture(1, depthImg);
+      canvas.className = 'hero-photo-canvas';
+      canvas.setAttribute('role', 'img');
+      canvas.setAttribute('aria-label', img.alt);
+      img.after(canvas);
+      img.hidden = true;
+      resize(); ready = true; last = null;
+    }).catch(function () { /* keep the plain photo */ });
+
+    function resize() {
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = Math.round(img.naturalWidth && canvas.clientWidth ? canvas.clientWidth * dpr : img.naturalWidth);
+      canvas.height = Math.round(canvas.width * img.naturalHeight / img.naturalWidth);
+      gl.viewport(0, 0, canvas.width, canvas.height);
+      last = null;
+    }
+    window.addEventListener('resize', function () { if (ready) resize(); });
+
+    return {
+      render: function (mx, my) {
+        if (!ready) return;
+        var ox = mx * 0.055, oy = my * 0.03;
+        if (last && Math.abs(last[0] - ox) < 1e-5 && Math.abs(last[1] - oy) < 1e-5) return;
+        last = [ox, oy];
+        gl.uniform2f(uOffset, ox, oy);
+        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+      }
+    };
+  }
 
   /* ---------- project card tilt + case study toggle ---------- */
   document.querySelectorAll('.project-card').forEach(function (card) {
