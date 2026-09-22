@@ -48,24 +48,49 @@
   </div>
 
   <section id="home" class="hero">
-    <div class="hero-inner">
-
-      <div class="eyebrow hero-eyebrow">Hi, I'm</div>
-      <h1>Mohammed Ashikq</h1>
-      <div class="typed-line"><span id="typed"></span><span class="caret"></span></div>
-
-      <div class="portrait-outer">
-        <div class="portrait-glow"></div>
-        <canvas id="portrait-canvas" aria-label="Mohammed Ashikq" role="img"></canvas>
+    <!-- cinematic stage: backlight, portrait and floating glass card move at different depths -->
+    <div class="hero-stage">
+      <div class="hero-backlight" data-depth="0.25"></div>
+      <div class="hero-portrait" data-depth="0.55">
+        <img src="assets/portrait-hand.webp" alt="Mohammed Ashikq holding out his hand" width="1122" height="1402">
+        <!-- card sits just above the open palm (palm is ~18% from the left, ~54% down the photo) -->
+        <div class="hero-card-anchor" data-depth="0.65">
+          <div class="hero-card-spill"></div>
+          <div class="hero-card-float">
+            <div class="hero-card" id="hero-card">
+              <div class="hc-glare"></div>
+              <div class="hc-top">
+                <img class="hc-avatar" src="assets/avatar.webp" alt="">
+                <div>
+                  <div class="hc-name">Mohammed Ashikq</div>
+                  <div class="hc-handle">@ashikq386</div>
+                </div>
+              </div>
+              <span class="hc-status"><i></i>Open to opportunities</span>
+              <p class="hc-bio">MSc AI student crafting intelligent, beautifully-designed experiences — from computer vision systems to premium interfaces.</p>
+              <div class="hc-stats">
+                <div><b>10+</b><span>Projects</span></div>
+                <div><b>15+</b><span>Tools</span></div>
+                <div><b>MSc</b><span>Aston '27</span></div>
+              </div>
+              <a href="#contact" class="hc-btn">Let's talk <span>→</span></a>
+            </div>
+          </div>
+        </div>
       </div>
+    </div>
 
-      <p class="hero-sub">MSc AI student and builder crafting intelligent, beautifully-designed digital experiences — from computer vision systems to premium interfaces.</p>
+    <div class="hero-copy">
+      <div class="eyebrow hero-eyebrow">Hi, I'm Mohammed Ashikq</div>
+      <h1>Designing <br>Intelligent <br>Experiences</h1>
+      <div class="typed-line"><span id="typed"></span><span class="caret"></span></div>
+    </div>
 
+    <div class="hero-side">
       <div class="hero-ctas">
         <a href="#projects" class="btn btn-light magnetic">View Projects</a>
-        <a href="assets/Mohammed_Ashikq_Resume.pdf" download="Mohammed_Ashikq_Resume.pdf" class="btn btn-ghost magnetic">Download Resume</a>
+        <a href="assets/Mohammed_Ashikq_Resume.pdf" download="Mohammed_Ashikq_Resume.pdf" class="btn btn-ghost magnetic">Resume</a>
       </div>
-
       <div class="hero-socials">
         <a href="https://github.com/ashikq386" target="_blank" rel="noopener" aria-label="GitHub">GH</a>
         <a href="#contact" aria-label="LinkedIn">in</a>
@@ -173,7 +198,7 @@
 
     <div class="project-grid">
       <article data-reveal class="project-card" data-id="geo" style="transition-delay:0ms;">
-        <div class="project-art" style="background:linear-gradient(135deg, rgba(143,193,255,0.28), rgba(255,255,255,0.06));">
+        <div class="project-art" style="background:linear-gradient(135deg, rgba(255,122,102,0.28), rgba(255,255,255,0.06));">
           <svg viewBox="0 0 400 180" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
             <g stroke="rgba(255,255,255,0.10)" stroke-width="1">
               <path d="M0 40 H400 M0 90 H400 M0 140 H400"/>
@@ -184,10 +209,10 @@
             <rect x="70" y="46" width="60" height="30" rx="4" fill="rgba(255,255,255,0.08)"/>
             <rect x="262" y="102" width="70" height="32" rx="4" fill="rgba(255,255,255,0.08)"/>
             <rect x="302" y="30" width="34" height="48" rx="4" fill="rgba(255,255,255,0.06)"/>
-            <circle cx="200" cy="90" r="58" fill="rgba(62,111,224,0.18)" stroke="#8FC1FF" stroke-width="1.5" stroke-dasharray="6 5"/>
-            <path d="M200 60 c-11 0 -18 8 -18 17 c0 12 18 32 18 32 s18 -20 18 -32 c0 -9 -7 -17 -18 -17 z" fill="#8FC1FF"/>
+            <circle cx="200" cy="90" r="58" fill="rgba(229,56,59,0.18)" stroke="#FF7A66" stroke-width="1.5" stroke-dasharray="6 5"/>
+            <path d="M200 60 c-11 0 -18 8 -18 17 c0 12 18 32 18 32 s18 -20 18 -32 c0 -9 -7 -17 -18 -17 z" fill="#FF7A66"/>
             <circle cx="200" cy="78" r="6" fill="#0b1226"/>
-            <circle cx="240" cy="58" r="13" fill="#3E6FE0"/>
+            <circle cx="240" cy="58" r="13" fill="#E5383B"/>
             <path d="M234 58 l4 5 l8 -9" stroke="#fff" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
@@ -210,7 +235,7 @@
       </article>
 
       <article data-reveal class="project-card" data-id="colorize" style="transition-delay:100ms;">
-        <div class="project-art" style="background:linear-gradient(135deg, rgba(255,255,255,0.14), rgba(94,140,255,0.22));">
+        <div class="project-art" style="background:linear-gradient(135deg, rgba(255,255,255,0.14), rgba(229,70,60,0.22));">
           <svg viewBox="0 0 400 180" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
             <defs>
               <clipPath id="colorize-frame"><rect x="70" y="22" width="260" height="126" rx="10"/></clipPath>
@@ -222,16 +247,16 @@
               <path d="M70 148 L110 108 L150 148 Z" fill="#5b626e"/>
               <rect x="200" y="22" width="130" height="126" fill="#1c3f8e"/>
               <circle cx="285" cy="54" r="14" fill="#FFD489"/>
-              <path d="M200 90 L240 118 L280 82 L330 128 L330 148 L200 148 Z" fill="#3E6FE0"/>
+              <path d="M200 90 L240 118 L280 82 L330 128 L330 148 L200 148 Z" fill="#E5383B"/>
               <path d="M250 148 L290 108 L330 148 Z" fill="#63C7FF"/>
-              <rect x="197" y="22" width="6" height="126" fill="#D6E8FF" opacity="0.9"/>
+              <rect x="197" y="22" width="6" height="126" fill="#FFDCD4" opacity="0.9"/>
             </g>
             <rect x="70" y="22" width="260" height="126" rx="10" fill="none" stroke="rgba(255,255,255,0.3)"/>
-            <g fill="#8FC1FF">
+            <g fill="#FF7A66">
               <circle cx="150" cy="164" r="4"/><circle cx="185" cy="164" r="4"/>
               <circle cx="220" cy="164" r="4"/><circle cx="255" cy="164" r="4"/>
             </g>
-            <path d="M154 164 H251" stroke="rgba(143,193,255,0.5)" stroke-width="1.5"/>
+            <path d="M154 164 H251" stroke="rgba(255,122,102,0.5)" stroke-width="1.5"/>
           </svg>
         </div>
         <div class="project-body">
@@ -253,7 +278,7 @@
       </article>
 
       <article data-reveal class="project-card" data-id="construction" style="transition-delay:200ms;">
-        <div class="project-art" style="background:linear-gradient(135deg, rgba(94,140,255,0.32), rgba(10,18,40,0.25));">
+        <div class="project-art" style="background:linear-gradient(135deg, rgba(229,70,60,0.32), rgba(10,18,40,0.25));">
           <svg viewBox="0 0 400 180" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
             <g fill="rgba(255,255,255,0.10)">
               <rect x="40" y="96" width="44" height="84"/>
@@ -267,16 +292,16 @@
               <rect x="250" y="96" width="8" height="8"/><rect x="266" y="96" width="8" height="8"/>
               <rect x="250" y="112" width="8" height="8"/><rect x="266" y="112" width="8" height="8"/>
             </g>
-            <rect x="160" y="100" width="68" height="80" fill="rgba(62,111,224,0.38)" stroke="#8FC1FF" stroke-width="1.5"/>
-            <g fill="rgba(214,232,255,0.5)">
+            <rect x="160" y="100" width="68" height="80" fill="rgba(229,56,59,0.38)" stroke="#FF7A66" stroke-width="1.5"/>
+            <g fill="rgba(255,220,212,0.5)">
               <rect x="170" y="110" width="9" height="9"/><rect x="190" y="110" width="9" height="9"/><rect x="210" y="110" width="9" height="9"/>
               <rect x="170" y="128" width="9" height="9"/><rect x="190" y="128" width="9" height="9"/><rect x="210" y="128" width="9" height="9"/>
             </g>
-            <path d="M194 48 L160 100 L228 100 Z" fill="rgba(143,193,255,0.16)" stroke="rgba(143,193,255,0.45)" stroke-width="1" stroke-dasharray="4 4"/>
-            <rect x="176" y="36" width="36" height="10" rx="5" fill="#D6E8FF"/>
-            <path d="M176 40 l-18 -10 M212 40 l18 -10" stroke="#8FC1FF" stroke-width="2"/>
-            <ellipse cx="156" cy="28" rx="15" ry="3.5" fill="rgba(214,232,255,0.55)"/>
-            <ellipse cx="232" cy="28" rx="15" ry="3.5" fill="rgba(214,232,255,0.55)"/>
+            <path d="M194 48 L160 100 L228 100 Z" fill="rgba(255,122,102,0.16)" stroke="rgba(255,122,102,0.45)" stroke-width="1" stroke-dasharray="4 4"/>
+            <rect x="176" y="36" width="36" height="10" rx="5" fill="#FFDCD4"/>
+            <path d="M176 40 l-18 -10 M212 40 l18 -10" stroke="#FF7A66" stroke-width="2"/>
+            <ellipse cx="156" cy="28" rx="15" ry="3.5" fill="rgba(255,220,212,0.55)"/>
+            <ellipse cx="232" cy="28" rx="15" ry="3.5" fill="rgba(255,220,212,0.55)"/>
             <path d="M250 64 l14 24 h-28 z" fill="#FFB84D"/>
             <rect x="248.6" y="72" width="2.8" height="9" rx="1.4" fill="#241500"/>
             <circle cx="250" cy="84.5" r="1.8" fill="#241500"/>
@@ -301,25 +326,25 @@
       </article>
 
       <article data-reveal class="project-card" data-id="justorder" style="transition-delay:300ms;">
-        <div class="project-art" style="background:linear-gradient(135deg, rgba(255,255,255,0.16), rgba(143,193,255,0.18));">
+        <div class="project-art" style="background:linear-gradient(135deg, rgba(255,255,255,0.16), rgba(255,122,102,0.18));">
           <svg viewBox="0 0 400 180" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-            <path d="M90 140 C 160 60, 250 170, 328 72" stroke="#8FC1FF" stroke-width="2" stroke-dasharray="7 6" fill="none"/>
-            <path d="M330 44 c-9 0 -15 6.5 -15 14 c0 10 15 27 15 27 s15 -17 15 -27 c0 -7.5 -6 -14 -15 -14 z" fill="#8FC1FF"/>
+            <path d="M90 140 C 160 60, 250 170, 328 72" stroke="#FF7A66" stroke-width="2" stroke-dasharray="7 6" fill="none"/>
+            <path d="M330 44 c-9 0 -15 6.5 -15 14 c0 10 15 27 15 27 s15 -17 15 -27 c0 -7.5 -6 -14 -15 -14 z" fill="#FF7A66"/>
             <circle cx="330" cy="59" r="5" fill="#0b1226"/>
             <rect x="52" y="30" width="74" height="126" rx="12" fill="rgba(11,18,38,0.55)" stroke="rgba(255,255,255,0.35)"/>
-            <rect x="60" y="44" width="58" height="38" rx="6" fill="rgba(143,193,255,0.22)"/>
+            <rect x="60" y="44" width="58" height="38" rx="6" fill="rgba(255,122,102,0.22)"/>
             <path d="M74 65 a15 9 0 0 1 30 0 z" fill="#FFC97A"/>
             <rect x="74" y="65" width="30" height="4" rx="2" fill="#7A4A21"/>
             <rect x="72" y="70" width="34" height="3" rx="1.5" fill="#7FBF5A"/>
             <rect x="74" y="74" width="30" height="6" rx="3" fill="#FFC97A"/>
             <rect x="60" y="92" width="58" height="8" rx="4" fill="rgba(255,255,255,0.25)"/>
             <rect x="60" y="106" width="42" height="8" rx="4" fill="rgba(255,255,255,0.16)"/>
-            <rect x="60" y="128" width="58" height="16" rx="8" fill="#3E6FE0"/>
+            <rect x="60" y="128" width="58" height="16" rx="8" fill="#E5383B"/>
             <g transform="translate(206,116)">
-              <circle cx="-16" cy="18" r="10" fill="none" stroke="#D6E8FF" stroke-width="3"/>
-              <circle cx="20" cy="18" r="10" fill="none" stroke="#D6E8FF" stroke-width="3"/>
-              <path d="M-16 18 L-2 18 L8 0 L20 0 M20 0 L20 18" stroke="#8FC1FF" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-              <rect x="-8" y="-14" width="17" height="15" rx="3" fill="#8FC1FF"/>
+              <circle cx="-16" cy="18" r="10" fill="none" stroke="#FFDCD4" stroke-width="3"/>
+              <circle cx="20" cy="18" r="10" fill="none" stroke="#FFDCD4" stroke-width="3"/>
+              <path d="M-16 18 L-2 18 L8 0 L20 0 M20 0 L20 18" stroke="#FF7A66" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              <rect x="-8" y="-14" width="17" height="15" rx="3" fill="#FF7A66"/>
             </g>
           </svg>
         </div>

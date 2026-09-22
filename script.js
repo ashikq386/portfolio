@@ -119,143 +119,40 @@
     });
   }
 
-  /* ---------- hero particle portrait ----------
-     The photo is rendered as a grid of luminance-sampled dots (halftone).
-     Dots assemble from random scatter on load, then repel from the cursor
-     and spring back home. */
+  /* ---------- hero parallax + floating card tilt ----------
+     Layers tagged [data-depth] drift with the cursor at different speeds,
+     and the glass card tilts toward the pointer with a moving glare. */
   (function () {
-    var canvas = document.getElementById('portrait-canvas');
-    if (!canvas) return;
-    var ctx = canvas.getContext('2d');
-    var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var hero = document.getElementById('home');
+    var card = document.getElementById('hero-card');
+    if (!hero || !card) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-    var particles = [];
-    var W = 0, H = 0;
-    var dpr = Math.min(window.devicePixelRatio || 1, 2);
-    var mouse = { x: -9999, y: -9999 };
-    var introStart = null;
-    var INTRO_MS = reducedMotion ? 0 : 1400;
-    var REPEL_RADIUS = reducedMotion ? 0 : 85;
+    var layers = hero.querySelectorAll('[data-depth]');
+    var target = { x: 0, y: 0 }, cur = { x: 0, y: 0 };
 
-    var img = new Image();
-    img.src = 'assets/portrait.webp';
-    img.onload = function () {
-      build();
-      requestAnimationFrame(tick);
-    };
+    hero.addEventListener('mousemove', function (e) {
+      var rect = hero.getBoundingClientRect();
+      target.x = (e.clientX - rect.left) / rect.width - 0.5;
+      target.y = (e.clientY - rect.top) / rect.height - 0.5;
+    });
+    hero.addEventListener('mouseleave', function () { target.x = 0; target.y = 0; });
 
-    function build() {
-      var rect = canvas.parentElement.getBoundingClientRect();
-      W = Math.floor(rect.width);
-      H = Math.floor(rect.height);
-      if (!W || !H) return;
-      canvas.width = W * dpr;
-      canvas.height = H * dpr;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-      var off = document.createElement('canvas');
-      off.width = W; off.height = H;
-      var octx = off.getContext('2d');
-      var scale = Math.max(W / img.width, H / img.height);
-      var dw = img.width * scale, dh = img.height * scale;
-      octx.drawImage(img, (W - dw) / 2, (H - dh) / 2, dw, dh);
-      var data = octx.getImageData(0, 0, W, H).data;
-
-      particles = [];
-      var step = 4;
-      for (var y = 0; y < H; y += step) {
-        for (var x = 0; x < W; x += step) {
-          var i = (y * W + x) * 4;
-          var lum = 0.2126 * data[i] + 0.7152 * data[i + 1] + 0.0722 * data[i + 2];
-          lum = Math.pow(lum / 255, 0.62) * 255;   /* lift shadows */
-          lum = (lum - 110) * 1.25 + 128;          /* contrast */
-          if (lum < 30) continue;
-
-          var fade = 1, fy = y / H;
-          if (fy < 0.10) fade *= fy / 0.10;                    /* fade in at top */
-          if (fy > 0.70) fade *= Math.max(0, (1 - fy) / 0.30); /* dissolve at bottom */
-          var a = Math.min(1, lum / 255) * fade;
-          if (a < 0.05) continue;
-
-          particles.push({
-            hx: x, hy: y,
-            x: x, y: y, vx: 0, vy: 0,
-            sx: Math.random() * W, sy: Math.random() * H, /* intro scatter start */
-            delay: Math.random() * 500,
-            r: 0.7 + (lum / 255) * 1.7,
-            a: a,
-            settled: false
-          });
-        }
+    function tick() {
+      cur.x += (target.x - cur.x) * 0.08;
+      cur.y += (target.y - cur.y) * 0.08;
+      for (var i = 0; i < layers.length; i++) {
+        var d = parseFloat(layers[i].getAttribute('data-depth'));
+        layers[i].style.transform =
+          'translate3d(' + (cur.x * d * 40).toFixed(2) + 'px, ' + (cur.y * d * 24).toFixed(2) + 'px, 0)';
       }
-    }
-
-    var heroSection = document.getElementById('home');
-    heroSection.addEventListener('mousemove', function (e) {
-      var rect = canvas.getBoundingClientRect();
-      mouse.x = e.clientX - rect.left;
-      mouse.y = e.clientY - rect.top;
-    });
-    heroSection.addEventListener('mouseleave', function () {
-      mouse.x = -9999; mouse.y = -9999;
-    });
-
-    var resizeTimer;
-    window.addEventListener('resize', function () {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(function () {
-        if (img.complete) {
-          build();
-          particles.forEach(function (p) { p.settled = true; p.x = p.hx; p.y = p.hy; });
-        }
-      }, 200);
-    });
-
-    function tick(now) {
-      if (introStart === null) introStart = now;
-      ctx.clearRect(0, 0, W, H);
-      ctx.fillStyle = '#fff';
-
-      for (var k = 0; k < particles.length; k++) {
-        var p = particles[k];
-
-        if (!p.settled) {
-          var t = (now - introStart - p.delay) / INTRO_MS;
-          if (t < 0) continue;
-          if (t >= 1) {
-            p.settled = true;
-            p.x = p.hx; p.y = p.hy;
-          } else {
-            var e = 1 - Math.pow(1 - t, 3);
-            var ix = p.sx + (p.hx - p.sx) * e;
-            var iy = p.sy + (p.hy - p.sy) * e;
-            ctx.globalAlpha = p.a * e;
-            ctx.fillRect(ix, iy, p.r, p.r);
-            continue;
-          }
-        }
-
-        var dx = p.x - mouse.x, dy = p.y - mouse.y;
-        var dist2 = dx * dx + dy * dy;
-        if (dist2 < REPEL_RADIUS * REPEL_RADIUS) {
-          var dist = Math.sqrt(dist2) || 1;
-          var f = (REPEL_RADIUS - dist) / REPEL_RADIUS;
-          p.vx += (dx / dist) * f * 2.4;
-          p.vy += (dy / dist) * f * 2.4;
-        }
-        p.vx += (p.hx - p.x) * 0.02;
-        p.vy += (p.hy - p.y) * 0.02;
-        p.vx *= 0.86;
-        p.vy *= 0.86;
-        p.x += p.vx;
-        p.y += p.vy;
-
-        ctx.globalAlpha = p.a;
-        ctx.fillRect(p.x, p.y, p.r, p.r);
-      }
-      ctx.globalAlpha = 1;
+      card.style.transform =
+        'perspective(900px) rotateX(' + (-cur.y * 22).toFixed(2) + 'deg) rotateY(' + (cur.x * 28).toFixed(2) + 'deg)';
+      card.style.setProperty('--gx', (50 + cur.x * 120).toFixed(1) + '%');
+      card.style.setProperty('--gy', (40 + cur.y * 120).toFixed(1) + '%');
       requestAnimationFrame(tick);
     }
+    requestAnimationFrame(tick);
   })();
 
   /* ---------- project card tilt + case study toggle ---------- */
